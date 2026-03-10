@@ -296,6 +296,7 @@ function PhotoCard3D() {
         justifyContent: "center",
         animation: "fadeSlideUp 0.9s 0.3s ease both",
         position: "relative",
+        width: "min(92vw, 440px)",
       }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
@@ -304,8 +305,8 @@ function PhotoCard3D() {
       <div
         style={{
           position: "absolute",
-          width: 380,
-          height: 480,
+          width: "min(92vw, 380px)",
+          height: "min(116vw, 480px)",
           borderRadius: "24px",
           background: "transparent",
           border: "1px solid rgba(163,255,71,0.15)",
@@ -317,8 +318,8 @@ function PhotoCard3D() {
       <div
         style={{
           position: "absolute",
-          width: 400,
-          height: 500,
+          width: "min(96vw, 400px)",
+          height: "min(122vw, 500px)",
           borderRadius: "28px",
           background: "transparent",
           border: "1px solid rgba(71,212,255,0.08)",
@@ -331,8 +332,8 @@ function PhotoCard3D() {
       <div
         ref={cardRef}
         style={{
-          width: 340,
-          height: 440,
+          width: "min(86vw, 340px)",
+          height: "min(112vw, 440px)",
           borderRadius: "20px",
           position: "relative",
           transformStyle: "preserve-3d",
@@ -1254,7 +1255,7 @@ function ContactSection() {
 
         {!sent ? (
           <div style={{ opacity: visible ? 1 : 0, transform: visible ? "none" : "translateY(40px)", transition: "all 0.7s 0.2s ease", textAlign: "left", display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1rem" }}>
               <input placeholder="Your name" value={formState.name} onChange={(e) => setFormState((p) => ({ ...p, name: e.target.value }))} style={inputStyle} onFocus={(e) => (e.target.style.borderColor = "rgba(163,255,71,0.5)")} onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")} />
               <input placeholder="Email address" value={formState.email} onChange={(e) => setFormState((p) => ({ ...p, email: e.target.value }))} style={inputStyle} onFocus={(e) => (e.target.style.borderColor = "rgba(163,255,71,0.5)")} onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")} />
             </div>
@@ -1370,6 +1371,13 @@ export default function Portfolio() {
           nav { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
           section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
           .skillsGrid{ grid-template-columns: 1fr; gap: 2rem; }
+          nav > div { gap: 1.25rem !important; }
+          nav button { font-size: 0.7rem !important; }
+        }
+
+        @media (max-width: 420px) {
+          nav { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+          nav > div { gap: 0.9rem !important; }
         }
 
         @keyframes cardRingPulse {
