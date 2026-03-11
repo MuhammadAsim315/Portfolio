@@ -404,7 +404,8 @@ function PhotoCard3D() {
         justifyContent: "center",
         animation: "fadeSlideUp 0.9s 0.3s ease both",
         position: "relative",
-        width: "min(92vw, 440px)",
+        width: "100%",
+        maxWidth: 440,
       }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
@@ -416,8 +417,9 @@ function PhotoCard3D() {
           left: "50%",
           top: "50%",
           transform: "translate(-50%, -50%)",
-          width: "min(92vw, 380px)",
-          height: "min(116vw, 480px)",
+          width: "100%",
+          maxWidth: 380,
+          aspectRatio: "380 / 480",
           borderRadius: "24px",
           background: "transparent",
           border: "1px solid rgba(163,255,71,0.15)",
@@ -432,8 +434,9 @@ function PhotoCard3D() {
           left: "50%",
           top: "50%",
           transform: "translate(-50%, -50%)",
-          width: "min(96vw, 400px)",
-          height: "min(122vw, 500px)",
+          width: "100%",
+          maxWidth: 400,
+          aspectRatio: "400 / 500",
           borderRadius: "28px",
           background: "transparent",
           border: "1px solid rgba(71,212,255,0.08)",
@@ -446,8 +449,9 @@ function PhotoCard3D() {
       <div
         ref={cardRef}
         style={{
-          width: "min(86vw, 340px)",
-          height: "min(112vw, 440px)",
+          width: "100%",
+          maxWidth: 340,
+          aspectRatio: "340 / 440",
           borderRadius: "20px",
           position: "relative",
           transformStyle: "preserve-3d",
@@ -605,6 +609,7 @@ function Hero() {
 
   return (
     <section
+      className="heroSection"
       style={{
         minHeight: "100vh",
         display: "flex",
@@ -1428,7 +1433,8 @@ export default function Portfolio() {
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; cursor: none; }
-        body { background: #06060a; overflow-x: clip; color: #fff; }
+        html, body { max-width: 100%; overflow-x: hidden; }
+        body { background: #06060a; color: #fff; }
         ::selection { background: rgba(163,255,71,0.25); color: #fff; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #06060a; }
@@ -1445,7 +1451,9 @@ export default function Portfolio() {
           grid-template-columns: 1fr auto;
           gap: 4rem;
           align-items: center;
+          min-width: 0;
         }
+        .heroGrid > * { min-width: 0; }
         .heroRight { padding: 0; }
 
         .skillsGrid{
@@ -1490,6 +1498,7 @@ export default function Portfolio() {
           .navLinks { display: none !important; }
           .navToggle { display: inline-flex !important; align-items: center; justify-content: center; }
           .availabilityBadge { display: none !important; }
+          .heroSection { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
         }
 
         @media (max-width: 420px) {
