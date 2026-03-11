@@ -1506,7 +1506,7 @@ export default function Portfolio() {
         @media (max-width: 420px) {
           nav { padding-top: 1rem !important; padding-bottom: 1rem !important; }
           .heroH1 {
-            font-size: 9.6vw !important;
+            font-size: 9.2vw !important;
             letter-spacing: -0.055em !important;
             word-break: keep-all;
             max-width: 100%;
@@ -1516,7 +1516,13 @@ export default function Portfolio() {
 
         @media (max-width: 360px) {
           .heroH1 {
-            font-size: 9.2vw !important;
+            font-size: 8.9vw !important;
+          }
+        }
+
+        @media (max-width: 320px) {
+          .heroH1 {
+            font-size: 8.6vw !important;
           }
         }
 
