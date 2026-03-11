@@ -305,6 +305,9 @@ function PhotoCard3D() {
       <div
         style={{
           position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
           width: "min(92vw, 380px)",
           height: "min(116vw, 480px)",
           borderRadius: "24px",
@@ -318,6 +321,9 @@ function PhotoCard3D() {
       <div
         style={{
           position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
           width: "min(96vw, 400px)",
           height: "min(122vw, 500px)",
           borderRadius: "28px",
@@ -560,6 +566,7 @@ function Hero() {
       >
         <div>
           <div
+            className="availabilityBadge"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -1312,7 +1319,7 @@ export default function Portfolio() {
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; cursor: none; }
-        body { background: #06060a; overflow-x: hidden; color: #fff; }
+        body { background: #06060a; overflow-x: clip; color: #fff; }
         ::selection { background: rgba(163,255,71,0.25); color: #fff; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #06060a; }
@@ -1373,6 +1380,7 @@ export default function Portfolio() {
           .skillsGrid{ grid-template-columns: 1fr; gap: 2rem; }
           nav > div { gap: 1.25rem !important; }
           nav button { font-size: 0.7rem !important; }
+          .availabilityBadge { display: none !important; }
         }
 
         @media (max-width: 420px) {
