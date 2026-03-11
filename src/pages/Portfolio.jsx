@@ -106,6 +106,7 @@ function CustomCursor() {
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", h);
@@ -116,58 +117,165 @@ function Nav() {
     document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
   return (
-    <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        padding: "1.2rem 2.5rem",
-        background: scrolled ? "rgba(6,6,10,0.88)" : "transparent",
-        backdropFilter: scrolled ? "blur(18px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(163,255,71,0.08)" : "none",
-        transition: "all 0.4s ease",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}
-    >
-      <span
+    <>
+      <nav
+        className="topNav"
         style={{
-          fontFamily: "'Space Mono', monospace",
-          fontSize: "1.05rem",
-          color: "#a3ff47",
-          letterSpacing: "0.04em",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1000,
+          padding: "1.2rem 2.5rem",
+          background: scrolled ? "rgba(6,6,10,0.88)" : "transparent",
+          backdropFilter: scrolled ? "blur(18px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(163,255,71,0.08)" : "none",
+          transition: "all 0.4s ease",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
-        M<span style={{ color: "#fff", opacity: 0.5 }}>.ASIM</span>
-      </span>
-      <div style={{ display: "flex", gap: "2.5rem" }}>
-        {NAV_LINKS.map((l) => (
-          <button
-            key={l}
-            onClick={() => scrollTo(l)}
+        <span
+          style={{
+            fontFamily: "'Space Mono', monospace",
+            fontSize: "1.05rem",
+            color: "#a3ff47",
+            letterSpacing: "0.04em",
+          }}
+        >
+          M<span style={{ color: "#fff", opacity: 0.5 }}>.ASIM</span>
+        </span>
+
+        <div className="navLinks" style={{ display: "flex", gap: "2.5rem" }}>
+          {NAV_LINKS.map((l) => (
+            <button
+              key={l}
+              onClick={() => scrollTo(l)}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "none",
+                fontFamily: "'Space Mono', monospace",
+                fontSize: "0.78rem",
+                color: "rgba(255,255,255,0.55)",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                transition: "color 0.2s",
+              }}
+              onMouseEnter={(e) => (e.target.style.color = "#a3ff47")}
+              onMouseLeave={(e) => (e.target.style.color = "rgba(255,255,255,0.55)")}
+            >
+              {l}
+            </button>
+          ))}
+        </div>
+
+        <button
+          className="navToggle"
+          type="button"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+          style={{
+            display: "none",
+            border: "1px solid rgba(255,255,255,0.14)",
+            background: "rgba(255,255,255,0.04)",
+            color: "#fff",
+            borderRadius: 10,
+            padding: "0.55rem 0.7rem",
+            lineHeight: 1,
+            cursor: "pointer",
+          }}
+        >
+          <span style={{ display: "block", width: 18, height: 2, background: open ? "#a3ff47" : "rgba(255,255,255,0.8)", marginBottom: 4 }} />
+          <span style={{ display: "block", width: 18, height: 2, background: open ? "#a3ff47" : "rgba(255,255,255,0.8)", marginBottom: 4, opacity: open ? 0.7 : 1 }} />
+          <span style={{ display: "block", width: 18, height: 2, background: open ? "#a3ff47" : "rgba(255,255,255,0.8)" }} />
+        </button>
+      </nav>
+
+      {open && (
+        <div
+          className="navOverlay"
+          role="presentation"
+          onClick={() => setOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 999,
+            background: "rgba(0,0,0,0.55)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            onClick={(e) => e.stopPropagation()}
             style={{
-              background: "none",
-              border: "none",
-              cursor: "none",
-              fontFamily: "'Space Mono', monospace",
-              fontSize: "0.78rem",
-              color: "rgba(255,255,255,0.55)",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              transition: "color 0.2s",
+              position: "absolute",
+              top: 68,
+              right: 16,
+              left: 16,
+              borderRadius: 14,
+              border: "1px solid rgba(255,255,255,0.12)",
+              background: "rgba(6,6,10,0.92)",
+              boxShadow: "0 30px 80px rgba(0,0,0,0.55)",
+              overflow: "hidden",
             }}
-            onMouseEnter={(e) => (e.target.style.color = "#a3ff47")}
-            onMouseLeave={(e) => (e.target.style.color = "rgba(255,255,255,0.55)")}
           >
-            {l}
-          </button>
-        ))}
-      </div>
-    </nav>
+            <div style={{ padding: "0.65rem 0.85rem", borderBottom: "1px solid rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.72rem", letterSpacing: "0.14em", color: "rgba(255,255,255,0.55)", textTransform: "uppercase" }}>
+                Menu
+              </span>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                style={{ border: "none", background: "transparent", color: "rgba(255,255,255,0.7)", fontFamily: "'Space Mono', monospace", fontSize: "0.8rem", cursor: "pointer" }}
+              >
+                Close
+              </button>
+            </div>
+
+            <div style={{ display: "grid" }}>
+              {NAV_LINKS.map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    scrollTo(l);
+                  }}
+                  style={{
+                    padding: "1rem 1rem",
+                    textAlign: "left",
+                    background: "transparent",
+                    border: "none",
+                    borderBottom: "1px solid rgba(255,255,255,0.06)",
+                    cursor: "pointer",
+                    fontFamily: "'Space Mono', monospace",
+                    fontSize: "0.9rem",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "#fff",
+                  }}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -503,6 +611,7 @@ function Hero() {
         flexDirection: "column",
         justifyContent: "center",
         padding: "0 2.5rem",
+        paddingTop: "clamp(5.5rem, 7vw, 7rem)",
         position: "relative",
         overflow: "hidden",
       }}
@@ -1378,14 +1487,13 @@ export default function Portfolio() {
           nav { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
           section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
           .skillsGrid{ grid-template-columns: 1fr; gap: 2rem; }
-          nav > div { gap: 1.25rem !important; }
-          nav button { font-size: 0.7rem !important; }
+          .navLinks { display: none !important; }
+          .navToggle { display: inline-flex !important; align-items: center; justify-content: center; }
           .availabilityBadge { display: none !important; }
         }
 
         @media (max-width: 420px) {
           nav { padding-top: 1rem !important; padding-bottom: 1rem !important; }
-          nav > div { gap: 0.9rem !important; }
         }
 
         @keyframes cardRingPulse {
