@@ -717,6 +717,7 @@ function Hero() {
           </div>
 
           <h1
+            className="heroH1 heroH1Primary"
             style={{
               fontFamily: "'Syne', sans-serif",
               fontSize: "clamp(2.8rem, 6vw, 7rem)",
@@ -731,6 +732,7 @@ function Hero() {
             MUHAMMAD
           </h1>
           <h1
+            className="heroH1 heroH1Secondary"
             style={{
               fontFamily: "'Syne', sans-serif",
               fontSize: "clamp(2.8rem, 6vw, 7rem)",
@@ -1503,6 +1505,12 @@ export default function Portfolio() {
 
         @media (max-width: 420px) {
           nav { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+          .heroH1 {
+            font-size: clamp(2.15rem, 10.5vw, 3.4rem) !important;
+            letter-spacing: -0.03em !important;
+            word-break: keep-all;
+          }
+          .heroH1Primary { margin-bottom: 0.2rem !important; }
         }
 
         @keyframes cardRingPulse {
