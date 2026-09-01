@@ -33,25 +33,40 @@ body {
 #canvas-wrap {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
   z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 #canvas-wrap canvas {
   display: block;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 #canvas-wrap::after {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse 140% 90% at 50% 100%,
+    ellipse 120% 70% at 50% 100%,
     rgba(6, 6, 6, 0.55) 0%,
-    rgba(6, 6, 6, 0) 55%
+    rgba(6, 6, 6, 0) 65%
   );
   pointer-events: none;
 }
 #grain {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
   z-index: 1;
   opacity: 0.05;
   mix-blend-mode: overlay;
@@ -741,6 +756,22 @@ footer {
   background: var(--onyx);
   position: relative;
   z-index: 2;
+}
+
+@media (max-width: 720px) {
+  section {
+    padding: 90px 5vw;
+  }
+  #hero {
+    padding: 0 5vw;
+  }
+  .skills-wrap {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .contact-links {
+    gap: 16px 24px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

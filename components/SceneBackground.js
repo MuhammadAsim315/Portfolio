@@ -31,14 +31,14 @@ export default function SceneBackground() {
     camera.lookAt(0, 4, -60);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     wrap.appendChild(renderer.domElement);
 
     // ---------- Night sky gradient ----------
     function makeSkyTexture() {
       const c = document.createElement("canvas");
-      c.width = 8;
+      c.width = 16;
       c.height = 512;
       const ctx = c.getContext("2d");
       const g = ctx.createLinearGradient(0, 0, 0, 512);
@@ -47,10 +47,12 @@ export default function SceneBackground() {
       g.addColorStop(0.78, "#3d3b3a");
       g.addColorStop(1, "#8f897c");
       ctx.fillStyle = g;
-      ctx.fillRect(0, 0, 8, 512);
+      ctx.fillRect(0, 0, 16, 512);
       const tex = new THREE.CanvasTexture(c);
       tex.wrapS = THREE.ClampToEdgeWrapping;
       tex.wrapT = THREE.ClampToEdgeWrapping;
+      tex.generateMipmaps = false;
+      tex.minFilter = THREE.LinearFilter;
       return tex;
     }
     scene.background = makeSkyTexture();
@@ -77,18 +79,23 @@ export default function SceneBackground() {
     const stars = new THREE.Points(starGeo, starMat);
     scene.add(stars);
 
-    // ---------- Glowing horizon sun/moon (static) ----------
+    // ---------- Glowing horizon sun/moon (static, perfectly circular) ----------
     function makeGlowTexture() {
       const c = document.createElement("canvas");
-      c.width = c.height = 256;
+      c.width = c.height = 512;
       const ctx = c.getContext("2d");
-      const g = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-      g.addColorStop(0, "rgba(255,255,255,0.9)");
-      g.addColorStop(0.4, "rgba(230,228,220,0.32)");
-      g.addColorStop(1, "rgba(230,228,220,0)");
+      const g = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
+      g.addColorStop(0, "rgba(255, 255, 255, 0.95)");
+      g.addColorStop(0.2, "rgba(242, 240, 236, 0.75)");
+      g.addColorStop(0.45, "rgba(217, 214, 204, 0.3)");
+      g.addColorStop(0.75, "rgba(143, 140, 134, 0.08)");
+      g.addColorStop(1, "rgba(6, 6, 6, 0)");
       ctx.fillStyle = g;
-      ctx.fillRect(0, 0, 256, 256);
-      return new THREE.CanvasTexture(c);
+      ctx.fillRect(0, 0, 512, 512);
+      const tex = new THREE.CanvasTexture(c);
+      tex.generateMipmaps = false;
+      tex.minFilter = THREE.LinearFilter;
+      return tex;
     }
     const sunMat = new THREE.SpriteMaterial({
       map: makeGlowTexture(),
@@ -97,8 +104,6 @@ export default function SceneBackground() {
       fog: false,
     });
     const sun = new THREE.Sprite(sunMat);
-    sun.scale.set(34, 34, 1);
-    sun.position.set(6, 11, -95);
     scene.add(sun);
 
     // ---------- Ground ----------
@@ -108,7 +113,7 @@ export default function SceneBackground() {
     ground.position.set(0, -0.1, -70);
     scene.add(ground);
 
-    // ---------- Hill silhouettes (single static composition) ----------
+    // ---------- Hill silhouettes ----------
     function hillShape(w, h) {
       const s = new THREE.Shape();
       s.moveTo(-w / 2, 0);
@@ -154,14 +159,31 @@ export default function SceneBackground() {
     const mist = new THREE.Points(mistGeo, mistMat);
     scene.add(mist);
 
-    // camera stays completely fixed — no cursor parallax — so the only
-    // moving element on the page is the scroll-linked star/arrow guide
-
+    // Responsive layout adapter for viewport changes (portrait/mobile vs desktop)
     function handleResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const aspect = w / h;
+      camera.aspect = aspect;
+
+      if (aspect < 1) {
+        // Mobile portrait: widen FOV slightly so composition doesn't clip, center and scale sun proportionately
+        camera.fov = 66;
+        sun.scale.set(22, 22, 1);
+        sun.position.set(2, 9.5, -95);
+      } else {
+        // Desktop / landscape
+        camera.fov = 52;
+        sun.scale.set(34, 34, 1);
+        sun.position.set(6, 11, -95);
+      }
+
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(w, h, false);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     }
+
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     let rafId;
