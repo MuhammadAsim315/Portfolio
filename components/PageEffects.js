@@ -59,7 +59,7 @@ export default function PageEffects() {
         entries.forEach((entry) => {
           if (entry.isIntersecting && hudOdo && hudLabel) {
             hudOdo.textContent = "MILE " + entry.target.dataset.mile;
-            hudLabel.textContent = "05 — " + entry.target.dataset.milelabel;
+            hudLabel.textContent = "06 — " + entry.target.dataset.milelabel;
           }
         });
       },

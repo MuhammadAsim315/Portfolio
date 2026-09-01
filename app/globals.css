@@ -153,7 +153,7 @@ body {
 
 #end-caption {
   position: fixed;
-  top: 38%;
+  top: clamp(80px, 16vh, 120px);
   left: 50%;
   z-index: 16;
   transform: translate(-50%, -50%);

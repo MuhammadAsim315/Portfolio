@@ -32,7 +32,7 @@ export default function Home() {
       <div id="hud">
         <span className="odo">MILE 00</span>
         <span className="sep">/</span>
-        <span>05 — START</span>
+        <span>06 — START</span>
       </div>
       <div id="end-caption">
         Thanks for visiting.
@@ -45,6 +45,9 @@ export default function Home() {
         <ul>
           <li>
             <a href="#profile">Profile</a>
+          </li>
+          <li>
+            <a href="#projects">Projects</a>
           </li>
           <li>
             <a href="#experience">Experience</a>
@@ -92,9 +95,9 @@ export default function Home() {
           <p className="sub reveal">
             Currently building toward a BS in Software Engineering while
             working independently as a freelance developer — most recently
-            designing and shipping a full rental platform end to end, from
-            routing and state management to deployment. Equally at home
-            reasoning about data structures and algorithms as about the
+            designing and shipping commercial web applications end to end, from
+            database schemas and authentication to responsive interfaces and deployment.
+            Equally at home reasoning about data structures and algorithms as about the
             pixel-level feel of an animation.
           </p>
           <div className="facts">
@@ -108,19 +111,19 @@ export default function Home() {
             </div>
             <div className="reveal">
               <div className="fact-label">Currently</div>
-              <div className="fact-value">Freelance · Fiverr</div>
+              <div className="fact-value">Focusing on gaining Experience</div>
             </div>
           </div>
         </section>
 
-        <section id="experience" data-mile="02" data-milelabel="EXPERIENCE">
+        <section id="projects" data-mile="02" data-milelabel="PROJECTS">
           <div className="eyebrow-label">
-            <span className="mi">02</span> Experience
+            <span className="mi">02</span> Projects
           </div>
 
           <div className="role-card reveal">
             <div className="meta">
-              Remote, Pakistan
+              Client Project
               <span className="status">Paid &amp; Delivered</span>
             </div>
             <div>
@@ -155,42 +158,126 @@ export default function Home() {
           </div>
 
           <div className="role-card reveal">
-            <div className="meta">Semester Projects</div>
+            <div className="meta">
+              Client Project
+              <span className="status">Paid &amp; Delivered</span>
+            </div>
             <div>
-              <h3>Academic Systems Work</h3>
-              <div className="org">COMSATS University Islamabad</div>
+              <h3>Full-Stack Developer</h3>
+              <div className="org">DailyDrops — Water Bottle Delivery Admin</div>
               <p>
-                Three independent projects spanning object-oriented design,
-                scripting and GUI development — see below.
+                Engineered a comprehensive single-admin web application for managing
+                a commercial water bottle delivery enterprise — replacing manual ledgers
+                with automated stock tracking, daily delivery records, customer accounts, and financial reports.
               </p>
-            </div>
-          </div>
-
-          <div className="project-grid reveal">
-            <div className="project-card">
-              <div className="lang">C++</div>
-              <h4>Library Management System</h4>
-              <p>
-                Object-oriented design with file handling to support book
-                lending, returns and inventory tracking.
-              </p>
-            </div>
-            <div className="project-card">
-              <div className="lang">Python</div>
-              <h4>File Automation Tool</h4>
-              <p>Scripted automation for file organization and routine system tasks.</p>
-            </div>
-            <div className="project-card">
-              <div className="lang">Java</div>
-              <h4>Movie Ticketing System</h4>
-              <p>Built with Java Swing GUI and a modular structure for easy maintenance.</p>
+              <ul>
+                <li>
+                  Architected a complete Supabase PostgreSQL database with Row-Level Security (RLS) policies and dedicated SQL views (<code>customer_summary</code>, <code>dashboard_stats</code>)
+                </li>
+                <li>
+                  Built single-admin authentication with protected route middleware and real-time dashboard KPI analytics
+                </li>
+                <li>
+                  Implemented automated stock balance logic (filled bottles vs. returned empties) and per-customer credit/due ledgers
+                </li>
+                <li>
+                  Designed custom ledger-style reporting covering daily, weekly, monthly, and custom date ranges across sales, deliveries, and expenses
+                </li>
+              </ul>
+              <div className="stack-tags">
+                <span>Next.js 14 (App Router)</span>
+                <span>Supabase (PostgreSQL &amp; Auth)</span>
+                <span>Tailwind CSS</span>
+                <span>TypeScript</span>
+                <span>Vercel</span>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="skills" data-mile="03" data-milelabel="SKILLS">
+        <section id="experience" data-mile="03" data-milelabel="EXPERIENCE">
           <div className="eyebrow-label">
-            <span className="mi">03</span> Skills
+            <span className="mi">03</span> Experience
+          </div>
+
+          <div className="role-card reveal">
+            <div className="meta">
+              Rawalpindi / Islamabad
+              <span className="status">Internship</span>
+            </div>
+            <div>
+              <h3>Angular Developer Intern</h3>
+              <div className="org">SPS — Software Productivity Strategists</div>
+              <p>
+                Contributed to the development and enhancement of production web applications,
+                building modular, responsive, and high-performance frontend interfaces using Angular and modern engineering practices.
+              </p>
+              <ul>
+                <li>
+                  Developed and maintained responsive web pages and reusable components across enterprise website features
+                </li>
+                <li>
+                  Structured Angular routing modules, dependency-injected services, and component-based UI architectures
+                </li>
+                <li>
+                  Integrated frontend clients with backend REST APIs for asynchronous data handling and state synchronization
+                </li>
+                <li>
+                  Conducted frontend debugging, cross-device testing, and collaborated in agile team workflows
+                </li>
+              </ul>
+              <div className="stack-tags">
+                <span>Angular</span>
+                <span>TypeScript</span>
+                <span>JavaScript</span>
+                <span>HTML5 &amp; CSS3</span>
+                <span>REST APIs</span>
+                <span>Git</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="role-card reveal">
+            <div className="meta">
+              Islamabad, Pakistan
+              <span className="status">Internship</span>
+            </div>
+            <div>
+              <h3>DevOps Engineer Intern</h3>
+              <div className="org">PTA — Pakistan Telecommunication Authority</div>
+              <p>
+                Gained practical immersion in Linux server environments, containerization, web server orchestration,
+                and application deployment workflows within a major telecommunications regulatory body.
+              </p>
+              <ul>
+                <li>
+                  Administered Linux / Ubuntu server environments, SSH access, firewall/network routing, and service management
+                </li>
+                <li>
+                  Constructed and managed Docker containers, Dockerfiles, custom bridge networks, and persistent storage volumes for applications and databases
+                </li>
+                <li>
+                  Configured Nginx as a reverse proxy and web server for efficient request routing and hosting
+                </li>
+                <li>
+                  Diagnosed and resolved networking, DNS, port bindings, and deployment-related issues
+                </li>
+              </ul>
+              <div className="stack-tags">
+                <span>Linux / Ubuntu</span>
+                <span>Docker</span>
+                <span>Docker Compose</span>
+                <span>Nginx</span>
+                <span>SSH &amp; Networking</span>
+                <span>DevOps</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="skills" data-mile="04" data-milelabel="SKILLS">
+          <div className="eyebrow-label">
+            <span className="mi">04</span> Skills
           </div>
           <div className="skills-wrap">
             <div className="skill-group reveal">
@@ -198,6 +285,7 @@ export default function Home() {
               {[
                 ["React", "Professional", 3],
                 ["Next.js", "Professional", 3],
+                ["Angular", "Professional", 3],
                 ["TypeScript", "Professional", 3],
                 ["Tailwind CSS", "Professional", 3],
                 ["Supabase", "Professional", 3],
@@ -221,10 +309,12 @@ export default function Home() {
             <div className="skill-group reveal">
               <div className="glabel">Tools &amp; Environment</div>
               {[
-                ["GitHub", "Professional", 3],
+                ["Docker", "Professional", 3],
+                ["Linux / Ubuntu", "Professional", 3],
+                ["Nginx", "Professional", 3],
+                ["Git & GitHub", "Professional", 3],
                 ["Vercel", "Professional", 3],
                 ["Android Studio", "Professional", 3],
-                ["Eclipse", "Professional", 3],
                 ["VS Code", "Native", 3],
               ].map(([name, level, on]) => (
                 <div className="skill-row" key={name}>
@@ -256,12 +346,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="education" data-mile="04" data-milelabel="EDUCATION">
+        <section id="education" data-mile="05" data-milelabel="EDUCATION">
           <div className="eyebrow-label">
-            <span className="mi">04</span> Education
+            <span className="mi">05</span> Education
           </div>
           <div className="edu-row reveal">
-            <div className="when">2023 — Current</div>
+            <div className="when">2023 — 2027</div>
             <div>
               <h3>Bachelor of Science, Software Engineering</h3>
               <div className="place">COMSATS University Islamabad — Wah Campus</div>
@@ -275,9 +365,9 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contact" data-mile="05" data-milelabel="DESTINATION">
+        <section id="contact" data-mile="06" data-milelabel="DESTINATION">
           <div className="eyebrow-label">
-            <span className="mi">05</span> Contact
+            <span className="mi">06</span> Contact
           </div>
           <h2>
             Have a project in mind?
@@ -298,8 +388,6 @@ export default function Home() {
         </section>
 
         <footer>
-          Islamabad, Pakistan — Built with Next.js, Three.js &amp; a lot of
-          attention to detail.
         </footer>
       </div>
     </>
